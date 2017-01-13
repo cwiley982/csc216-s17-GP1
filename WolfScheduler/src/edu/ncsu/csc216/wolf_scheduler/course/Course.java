@@ -25,6 +25,7 @@ public class Course {
 	/** Course's ending time */
 	private int endTime;
 	/**
+	 * Creates a course with all fields
 	 * @param name - the name of the course
 	 * @param title -  the title of the course
 	 * @param section -  the course section
@@ -36,16 +37,17 @@ public class Course {
 	 */
 	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays,
 			int startTime, int endTime) {
-		this.name = name;
-		this.title = title;
-		this.section = section;
-		this.credits = credits;
-		this.instructorId = instructorId;
-		this.meetingDays = meetingDays;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		setName(name);
+		setTitle(title);
+		setSection(section);
+		setCredits(credits);
+		setInstructorId(instructorId);
+		setMeetingDays(meetingDays);
+		setStartTime(startTime);
+		setEndTime(endTime);
 	}
 	/**
+	 * Creates a course with the name, title, section, credits, instructor's id, and meeting days of the course
 	 * @param name - the name of the course
 	 * @param title -  the title of the course
 	 * @param section -  the course section
@@ -54,12 +56,7 @@ public class Course {
 	 * @param meetingDays - days the course meets
 	 */
 	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays) {
-		this.name = name;
-		this.title = title;
-		this.section = section;
-		this.credits = credits;
-		this.instructorId = instructorId;
-		this.meetingDays = meetingDays;
+		this(name, title, section, credits, instructorId, meetingDays, 0, 0);
 	}
 	/**
 	 * Returns the Course's name
@@ -72,7 +69,7 @@ public class Course {
 	 * Sets the Course's name
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 	/**
