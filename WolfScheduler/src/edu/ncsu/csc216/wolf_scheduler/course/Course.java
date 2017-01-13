@@ -173,4 +173,84 @@ public class Course {
 	public void setEndTime(int endTime) {
 		this.endTime = endTime;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	/**
+	 * Sets the hash code for the Course object
+	 * @return result - the hash code generated
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + credits;
+		result = prime * result + endTime;
+		result = prime * result + ((instructorId == null) ? 0 : instructorId.hashCode());
+		result = prime * result + ((meetingDays == null) ? 0 : meetingDays.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((section == null) ? 0 : section.hashCode());
+		result = prime * result + startTime;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		if (credits != other.credits)
+			return false;
+		if (endTime != other.endTime)
+			return false;
+		if (instructorId == null) {
+			if (other.instructorId != null)
+				return false;
+		} else if (!instructorId.equals(other.instructorId))
+			return false;
+		if (meetingDays == null) {
+			if (other.meetingDays != null)
+				return false;
+		} else if (!meetingDays.equals(other.meetingDays))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (section == null) {
+			if (other.section != null)
+				return false;
+		} else if (!section.equals(other.section))
+			return false;
+		if (startTime != other.startTime)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	/**
+	 * Returns a comma separated value String of all Course fields.
+	 * @return String representation of Course
+	 */
+	@Override
+	public String toString() {
+		if (meetingDays.equals("A")) {
+	        return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays;
+	    }
+	    return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays + "," + startTime + "," + endTime; 
+	}	
 }
