@@ -43,8 +43,7 @@ public class Course {
 		setCredits(credits);
 		setInstructorId(instructorId);
 		setMeetingDays(meetingDays);
-		setStartTime(startTime);
-		setEndTime(endTime);
+		setCourseTime(startTime, endTime);
 	}
 	/**
 	 * Creates a course with the name, title, section, credits, instructor's id, and meeting days of the course
@@ -68,8 +67,16 @@ public class Course {
 	/**
 	 * Sets the Course's name
 	 * @param name the name to set
+	 * @throws IllegalArgumentException if name is null, greater than 6 characters
+	 * or less than 4
 	 */
 	private void setName(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException();
+		}
+		if (name.length() < 4 || name.length() > 6) {
+			throw new IllegalArgumentException();
+		}
 		this.name = name;
 	}
 	/**
@@ -82,8 +89,15 @@ public class Course {
 	/**
 	 * Sets Course's title
 	 * @param title the title to set
+	 * @throws IllegalArgumentException if string is null or empty
 	 */
 	public void setTitle(String title) {
+		if (title == null) {
+			throw new IllegalArgumentException();
+		}
+		if (title.length() == 0) {
+			throw new IllegalArgumentException();
+		}
 		this.title = title;
 	}
 	/**
@@ -98,6 +112,17 @@ public class Course {
 	 * @param section the section to set
 	 */
 	public void setSection(String section) {
+		if (section == null) {
+			throw new IllegalArgumentException();
+		}
+		if (section.length() != 3) {
+			throw new IllegalArgumentException();
+		}
+		for (int i = 0; i < 3; i++) {
+			if (!Character.isDigit(section.charAt(i))) {
+				throw new IllegalArgumentException();
+			}
+		}
 		this.section = section;
 	}
 	/**
@@ -112,6 +137,9 @@ public class Course {
 	 * @param credits the credits to set
 	 */
 	public void setCredits(int credits) {
+		if (credits > 5 || credits < 1) {
+			throw new IllegalArgumentException();
+		}
 		this.credits = credits;
 	}
 	/**
@@ -126,6 +154,12 @@ public class Course {
 	 * @param instructorId the instructorId to set
 	 */
 	public void setInstructorId(String instructorId) {
+		if (instructorId == null) {
+			throw new IllegalArgumentException();
+		}
+		if (instructorId.length() < 1) {
+			throw new IllegalArgumentException();
+		}
 		this.instructorId = instructorId;
 	}
 	/**
@@ -140,6 +174,21 @@ public class Course {
 	 * @param meetingDays the meetingDays to set
 	 */
 	public void setMeetingDays(String meetingDays) {
+		if (meetingDays == null) {
+			throw new IllegalArgumentException();
+		}
+		if (meetingDays.length() < 1) {
+			throw new IllegalArgumentException();
+		}
+		if (meetingDays.indexOf("A") >= 0 && meetingDays.length() != 1) {
+			throw new IllegalArgumentException();
+		}
+		for (int i = 0; i < meetingDays.length(); i++) {
+			char letter = meetingDays.charAt(i);
+			if (letter != 'M' && letter != 'T' && letter != 'W' && letter != 'H' && letter != 'F' && letter != 'A') {
+				throw new IllegalArgumentException();
+			}
+		}
 		this.meetingDays = meetingDays;
 	}
 	/**
@@ -150,25 +199,87 @@ public class Course {
 		return startTime;
 	}
 	/**
-	 * Sets the start time
-	 * @param startTime the startTime to set
-	 */
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
-	}
-	/**
 	 * Returns the end time
 	 * @return the endTime
 	 */
 	public int getEndTime() {
 		return endTime;
 	}
-	/**
-	 * Sets the end time
-	 * @param endTime the endTime to set
-	 */
-	public void setEndTime(int endTime) {
+	public void setCourseTime(int startTime, int endTime) {
+		if (startTime < 0 || startTime > 2359) {
+			throw new IllegalArgumentException();
+		}
+		if (endTime < 0 || endTime > 2359) {
+			throw new IllegalArgumentException();
+		}
+		if (endTime < startTime) {
+			throw new IllegalArgumentException();
+		}
+		int startFirstDigit = startTime / 1000;
+		int startSecondDigit = (startTime % 1000) / 100;
+		int startThirdDigit = (startTime % 100) / 10;
+		if (startFirstDigit > 2) {
+			throw new IllegalArgumentException();
+		}
+		if (startFirstDigit == 2 && startSecondDigit > 4) {
+			throw new IllegalArgumentException();
+		}
+		if (startThirdDigit > 5) {
+			throw new IllegalArgumentException();
+		}
+		int endFirstDigit = startTime / 1000;
+		int endSecondDigit = (startTime % 1000) / 100;
+		int endThirdDigit = (startTime % 100) / 10;
+		if (endFirstDigit > 2) {
+			throw new IllegalArgumentException();
+		}
+		if (endFirstDigit == 2 && endSecondDigit > 4) {
+			throw new IllegalArgumentException();
+		}
+		if (endThirdDigit > 5) {
+			throw new IllegalArgumentException();
+		}
+		this.startTime = startTime;
 		this.endTime = endTime;
+	}
+	public String getMeetingString() {
+		if (getMeetingDays().indexOf("A") == 0) {
+			return "Arranged";
+		} else {
+			String meetingString = "";
+			meetingString += getMeetingDays() + " ";
+			int startHour = getStartTime() / 100;
+			int startMinutes = getStartTime() % 100;
+			if (startHour > 12) {
+				meetingString += startHour - 12 + ":" + startMinutes;
+				if (startMinutes == 0) {
+					meetingString += "0";
+				}
+				meetingString += "PM-";
+			} else {
+				meetingString += startHour + ":" + startMinutes;
+				if (startMinutes == 0) {
+					meetingString += "0";
+				}
+				meetingString += "AM-";
+			}
+			int endHour = getEndTime() / 100;
+			int endMinutes = getEndTime() % 100;
+			if (endHour > 12) {
+				meetingString += endHour - 12 + ":" + endMinutes;
+				if (endMinutes == 0) {
+					meetingString += "0";
+				}
+				meetingString += "PM";
+			} else {
+				meetingString += endHour + ":" + endMinutes;
+				if (endMinutes == 0) {
+					meetingString += "0";
+				}
+				meetingString += "AM";
+			}
+			return meetingString;
+		}
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -249,5 +360,5 @@ public class Course {
 	        return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays;
 	    }
 	    return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays + "," + startTime + "," + endTime; 
-	}	
+	}
 }
