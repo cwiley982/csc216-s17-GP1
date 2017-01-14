@@ -521,7 +521,7 @@ public class CourseTest {
 			assertEquals(END_TIME, c.getEndTime());
 		}
 		
-		//Test that setting the start time to 2400 doesn't change the start time (or anything else).
+		//Test that setting the end time to 2400 doesn't change the end time (or anything else).
 		try {
 			c.setCourseTime(1330, 2400);
 			fail();
@@ -536,7 +536,7 @@ public class CourseTest {
 			assertEquals(END_TIME, c.getEndTime());
 		}
 		
-		//Test that setting the start time to 1360 doesn't change the start time (or anything else).
+		//Test that setting the end time to 1360 doesn't change the end time (or anything else).
 		try {
 			c.setCourseTime(1330, 1360);
 			fail();
@@ -551,7 +551,7 @@ public class CourseTest {
 			assertEquals(END_TIME, c.getEndTime());
 		}
 		
-		//Test that setting the start time to -1 doesn't change the start time (or anything else).
+		//Test that setting the end time to -1 doesn't change the end time (or anything else).
 		try {
 			c.setCourseTime(1330, -1);
 			fail();

@@ -221,19 +221,19 @@ public class Course {
 		if (startFirstDigit > 2) {
 			throw new IllegalArgumentException();
 		}
-		if (startFirstDigit == 2 && startSecondDigit > 4) {
+		if (startFirstDigit == 2 && startSecondDigit > 3) {
 			throw new IllegalArgumentException();
 		}
 		if (startThirdDigit > 5) {
 			throw new IllegalArgumentException();
 		}
-		int endFirstDigit = startTime / 1000;
-		int endSecondDigit = (startTime % 1000) / 100;
-		int endThirdDigit = (startTime % 100) / 10;
+		int endFirstDigit = endTime / 1000;
+		int endSecondDigit = (endTime % 1000) / 100;
+		int endThirdDigit = (endTime % 100) / 10;
 		if (endFirstDigit > 2) {
 			throw new IllegalArgumentException();
 		}
-		if (endFirstDigit == 2 && endSecondDigit > 4) {
+		if (endFirstDigit == 2 && endSecondDigit > 3) {
 			throw new IllegalArgumentException();
 		}
 		if (endThirdDigit > 5) {
