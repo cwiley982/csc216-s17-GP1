@@ -24,16 +24,26 @@ public class Course {
 	private int startTime;
 	/** Course's ending time */
 	private int endTime;
+
 	/**
 	 * Creates a course with all fields
-	 * @param name - the name of the course
-	 * @param title -  the title of the course
-	 * @param section -  the course section
-	 * @param credits - credit hours for the course
-	 * @param instructorId - instructor's unity id
-	 * @param meetingDays - days the course meets
-	 * @param startTime - time course starts
-	 * @param endTime - time course ends
+	 * 
+	 * @param name
+	 *            - the name of the course
+	 * @param title
+	 *            - the title of the course
+	 * @param section
+	 *            - the course section
+	 * @param credits
+	 *            - credit hours for the course
+	 * @param instructorId
+	 *            - instructor's unity id
+	 * @param meetingDays
+	 *            - days the course meets
+	 * @param startTime
+	 *            - time course starts
+	 * @param endTime
+	 *            - time course ends
 	 */
 	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays,
 			int startTime, int endTime) {
@@ -45,33 +55,47 @@ public class Course {
 		setMeetingDays(meetingDays);
 		setCourseTime(startTime, endTime);
 	}
+
 	/**
-	 * Creates a course with the name, title, section, credits, instructor's id, and meeting days of the course
-	 * @param name - the name of the course
-	 * @param title -  the title of the course
-	 * @param section -  the course section
-	 * @param credits - credit hours for the course
-	 * @param instructorId - instructor's unity id
-	 * @param meetingDays - days the course meets
+	 * Creates a course with the name, title, section, credits, instructor's id,
+	 * and meeting days of the course
+	 * 
+	 * @param name
+	 *            - the name of the course
+	 * @param title
+	 *            - the title of the course
+	 * @param section
+	 *            - the course section
+	 * @param credits
+	 *            - credit hours for the course
+	 * @param instructorId
+	 *            - instructor's unity id
+	 * @param meetingDays
+	 *            - days the course meets
 	 */
 	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays) {
 		this(name, title, section, credits, instructorId, meetingDays, 0, 0);
 	}
+
 	/**
 	 * Returns the Course's name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * Sets the Course's name
-	 * @param name the name to set
-	 * @throws IllegalArgumentException if name is null, greater than 6 characters
-	 * or less than 4
+	 * 
+	 * @param name
+	 *            the name to set
+	 * @throws IllegalArgumentException
+	 *             if name is null, greater than 6 characters or less than 4
 	 */
 	private void setName(String name) {
-		if(name == null) {
+		if (name == null) {
 			throw new IllegalArgumentException();
 		}
 		if (name.length() < 4 || name.length() > 6) {
@@ -79,17 +103,23 @@ public class Course {
 		}
 		this.name = name;
 	}
+
 	/**
 	 * Returns Course's title
+	 * 
 	 * @return the title
 	 */
 	public String getTitle() {
 		return title;
 	}
+
 	/**
 	 * Sets Course's title
-	 * @param title the title to set
-	 * @throws IllegalArgumentException if string is null or empty
+	 * 
+	 * @param title
+	 *            the title to set
+	 * @throws IllegalArgumentException
+	 *             if string is null or empty
 	 */
 	public void setTitle(String title) {
 		if (title == null) {
@@ -100,16 +130,21 @@ public class Course {
 		}
 		this.title = title;
 	}
+
 	/**
 	 * Returns Course's section
+	 * 
 	 * @return the section
 	 */
 	public String getSection() {
 		return section;
 	}
+
 	/**
 	 * Sets Course's section
-	 * @param section the section to set
+	 * 
+	 * @param section
+	 *            the section to set
 	 */
 	public void setSection(String section) {
 		if (section == null) {
@@ -125,16 +160,21 @@ public class Course {
 		}
 		this.section = section;
 	}
+
 	/**
 	 * Returns Course's credits
+	 * 
 	 * @return the credits
 	 */
 	public int getCredits() {
 		return credits;
 	}
+
 	/**
 	 * Sets Course's credits
-	 * @param credits the credits to set
+	 * 
+	 * @param credits
+	 *            the credits to set
 	 */
 	public void setCredits(int credits) {
 		if (credits > 5 || credits < 1) {
@@ -142,16 +182,21 @@ public class Course {
 		}
 		this.credits = credits;
 	}
+
 	/**
 	 * Returns the instructor's id
+	 * 
 	 * @return the instructorId
 	 */
 	public String getInstructorId() {
 		return instructorId;
 	}
+
 	/**
 	 * Gets the instructor's id
-	 * @param instructorId the instructorId to set
+	 * 
+	 * @param instructorId
+	 *            the instructorId to set
 	 */
 	public void setInstructorId(String instructorId) {
 		if (instructorId == null) {
@@ -162,16 +207,21 @@ public class Course {
 		}
 		this.instructorId = instructorId;
 	}
+
 	/**
 	 * Returns the meeting days
+	 * 
 	 * @return the meetingDays
 	 */
 	public String getMeetingDays() {
 		return meetingDays;
 	}
+
 	/**
 	 * Sets the meeting days
-	 * @param meetingDays the meetingDays to set
+	 * 
+	 * @param meetingDays
+	 *            the meetingDays to set
 	 */
 	public void setMeetingDays(String meetingDays) {
 		if (meetingDays == null) {
@@ -191,20 +241,25 @@ public class Course {
 		}
 		this.meetingDays = meetingDays;
 	}
+
 	/**
 	 * Returns the start time
+	 * 
 	 * @return the startTime
 	 */
 	public int getStartTime() {
 		return startTime;
 	}
+
 	/**
 	 * Returns the end time
+	 * 
 	 * @return the endTime
 	 */
 	public int getEndTime() {
 		return endTime;
 	}
+
 	public void setCourseTime(int startTime, int endTime) {
 		if (startTime < 0 || startTime > 2359) {
 			throw new IllegalArgumentException();
@@ -242,6 +297,7 @@ public class Course {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
+
 	public String getMeetingString() {
 		if (getMeetingDays().indexOf("A") == 0) {
 			return "Arranged";
@@ -281,11 +337,15 @@ public class Course {
 			return meetingString;
 		}
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	/**
 	 * Sets the hash code for the Course object
+	 * 
 	 * @return result - the hash code generated
 	 */
 	@Override
@@ -302,7 +362,10 @@ public class Course {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -347,18 +410,23 @@ public class Course {
 			return false;
 		return true;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	/**
 	 * Returns a comma separated value String of all Course fields.
+	 * 
 	 * @return String representation of Course
 	 */
 	@Override
 	public String toString() {
 		if (meetingDays.equals("A")) {
-	        return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays;
-	    }
-	    return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays + "," + startTime + "," + endTime; 
+			return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays;
+		}
+		return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays + ","
+				+ startTime + "," + endTime;
 	}
 }
