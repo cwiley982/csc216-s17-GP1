@@ -74,20 +74,19 @@ public class CourseRecordIO {
 			String meetingDays = lineScan.next();
 			int startTime = 0;
 			int endTime = 0;
-			if (!meetingDays.equals("A")) {
+			if (meetingDays.equals("A")) {
+				try {
+					startTime = lineScan.nextInt();
+					endTime = lineScan.nextInt();
+					course = new Course(name, title, section, credits, instructorId, meetingDays, startTime, endTime);
+				} catch (NoSuchElementException e) {
+					course = new Course(name, title, section, credits, instructorId, meetingDays);
+				}
+			} else {
 				startTime = lineScan.nextInt();
 				endTime = lineScan.nextInt();
 				course = new Course(name, title, section, credits, instructorId, meetingDays, 
 						startTime, endTime);
-			} else {
-				try {
-					startTime = lineScan.nextInt();
-					endTime = lineScan.nextInt();
-					lineScan.close();
-					throw new IllegalArgumentException();
-				} catch (NullPointerException e) {
-					course = new Course(name, title, section, credits, instructorId, meetingDays);
-				}
 			}
 			lineScan.close();
 		} catch (NullPointerException e) {
