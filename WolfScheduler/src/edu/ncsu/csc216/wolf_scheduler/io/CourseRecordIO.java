@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.wolf_scheduler.course.Course;
@@ -26,11 +28,14 @@ public class CourseRecordIO {
 	 * Any invalid Courses are ignored. If the file to read cannot be found or
 	 * the permissions are incorrect a File NotFoundException is thrown.
 	 * 
-	 * @param fileName file to read course records from
+	 * @param fileName
+	 *            file to read course records from
 	 * @return a list of valid courses
-	 * @throws FileNotFoundException if file can't be found or read
+	 * @throws FileNotFoundException
+	 *             if file can't be found or read
 	 */
-	public static ArrayList<Course> readCourseRecords(String fileName) throws FileNotFoundException {
+	public static ArrayList<Course> readCourseRecords(String fileName) 
+			throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new File(fileName));
 		ArrayList<Course> courses = new ArrayList<Course>();
 		while (fileReader.hasNextLine()) {
@@ -39,7 +44,8 @@ public class CourseRecordIO {
 				boolean duplicate = false;
 				for (int i = 0; i < courses.size(); i++) {
 					Course c = courses.get(i);
-					if (course.getName().equals(c.getName()) && course.getSection().equals(c.getSection())) {
+					if (course.getName().equals(c.getName()) && 
+							course.getSection().equals(c.getSection())) {
 						// it's a duplicate
 						duplicate = true;
 					}
@@ -56,18 +62,44 @@ public class CourseRecordIO {
 	}
 
 	private static Course readCourse(String nextLine) {
-		// TODO Auto-generated method stub
-		return null;
+		Scanner lineScan = new Scanner(nextLine);
+		lineScan.useDelimiter(",");
+		Course course = null;
+		try {
+			String name = lineScan.next();
+			String title = lineScan.next();
+			String section = lineScan.next();
+			int credits = lineScan.nextInt();
+			String instructorId = lineScan.next();
+			String meetingDays = lineScan.next();
+			if (!meetingDays.equals("A")) {
+				int startTime = lineScan.nextInt();
+				int endTime = lineScan.nextInt();
+				course = new Course(name, title, section, credits, instructorId, meetingDays, 
+						startTime, endTime);
+			} else {
+				course = new Course(name, title, section, credits, instructorId, meetingDays);
+			}
+			lineScan.close();
+		} catch (NullPointerException e) {
+			throw new IllegalArgumentException();
+		} catch (NoSuchElementException e) {
+			throw new IllegalArgumentException();
+		}
+		return course;
 	}
 
 	/**
 	 * Writes Courses to course record file specified
 	 * 
-	 * @param fileName name of file to write course records to
-	 * @param courses list of courses
+	 * @param fileName
+	 *            name of file to write course records to
+	 * @param courses
+	 *            list of courses
 	 * @throws IOException
 	 */
-	public static void writeCourseRecords(String fileName, ArrayList<Course> courses) throws IOException {
+	public static void writeCourseRecords(String fileName, ArrayList<Course> courses) 
+			throws IOException {
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 		for (int i = 0; i < courses.size(); i++) {
 			fileWriter.println(courses.get(i).toString());

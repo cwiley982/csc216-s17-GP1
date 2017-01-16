@@ -45,8 +45,8 @@ public class Course {
 	 * @param endTime
 	 *            - time course ends
 	 */
-	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays,
-			int startTime, int endTime) {
+	public Course(String name, String title, String section, int credits, String instructorId,
+			String meetingDays, int startTime, int endTime) {
 		setName(name);
 		setTitle(title);
 		setSection(section);
@@ -73,7 +73,8 @@ public class Course {
 	 * @param meetingDays
 	 *            - days the course meets
 	 */
-	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays) {
+	public Course(String name, String title, String section, int credits, String instructorId,
+			String meetingDays) {
 		this(name, title, section, credits, instructorId, meetingDays, 0, 0);
 	}
 
@@ -235,7 +236,8 @@ public class Course {
 		}
 		for (int i = 0; i < meetingDays.length(); i++) {
 			char letter = meetingDays.charAt(i);
-			if (letter != 'M' && letter != 'T' && letter != 'W' && letter != 'H' && letter != 'F' && letter != 'A') {
+			if (letter != 'M' && letter != 'T' && letter != 'W' && letter != 'H' && letter != 'F'
+					&& letter != 'A') {
 				throw new IllegalArgumentException();
 			}
 		}
@@ -260,44 +262,56 @@ public class Course {
 		return endTime;
 	}
 
+	/**
+	 * Sets the start and end times for the course
+	 * 
+	 * @param startTime
+	 * @param endTime
+	 */
 	public void setCourseTime(int startTime, int endTime) {
-		if (startTime < 0 || startTime > 2359) {
-			throw new IllegalArgumentException();
-		}
-		if (endTime < 0 || endTime > 2359) {
+		if (startTime < 0 || startTime > 2359 || endTime < 0 || endTime > 2359) {
 			throw new IllegalArgumentException();
 		}
 		if (endTime < startTime) {
 			throw new IllegalArgumentException();
 		}
-		int startFirstDigit = startTime / 1000;
-		int startSecondDigit = (startTime % 1000) / 100;
-		int startThirdDigit = (startTime % 100) / 10;
-		if (startFirstDigit > 2) {
+		
+		int startHours = startTime / 100;
+		int startMinutes = startTime % 100;
+		/*String start = Integer.toString(startTime);
+		if (start.length() != 4) {
+			startHours =
+		}*/
+		if (startHours > 24) {
 			throw new IllegalArgumentException();
 		}
-		if (startFirstDigit == 2 && startSecondDigit > 3) {
+		if (startMinutes > 59) {
 			throw new IllegalArgumentException();
 		}
-		if (startThirdDigit > 5) {
+		int endHours = endTime / 100;
+		int endMinutes = endTime % 100;
+		/*String end = Integer.toString(endTime);
+		if (end.length() != 4) {
+			
+		}*/
+		if (endHours > 24) {
 			throw new IllegalArgumentException();
 		}
-		int endFirstDigit = endTime / 1000;
-		int endSecondDigit = (endTime % 1000) / 100;
-		int endThirdDigit = (endTime % 100) / 10;
-		if (endFirstDigit > 2) {
+		if (endMinutes > 59) {
 			throw new IllegalArgumentException();
 		}
-		if (endFirstDigit == 2 && endSecondDigit > 3) {
-			throw new IllegalArgumentException();
-		}
-		if (endThirdDigit > 5) {
+		if (this.getMeetingDays().equals("A") && startTime != 0 && endTime != 0) {
 			throw new IllegalArgumentException();
 		}
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
 
+	/**
+	 * Creates a string containing all of the info for a course separated with commas
+	 * 
+	 * @return string with course info
+	 */
 	public String getMeetingString() {
 		if (getMeetingDays().indexOf("A") == 0) {
 			return "Arranged";
@@ -424,9 +438,10 @@ public class Course {
 	@Override
 	public String toString() {
 		if (meetingDays.equals("A")) {
-			return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays;
+			return name + "," + title + "," + section + "," + credits + "," + instructorId + ","
+		+ meetingDays;
 		}
-		return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + meetingDays + ","
-				+ startTime + "," + endTime;
+		return name + "," + title + "," + section + "," + credits + "," + instructorId + "," + 
+		meetingDays + "," + startTime + "," + endTime;
 	}
 }
