@@ -278,10 +278,6 @@ public class Course {
 		
 		int startHours = startTime / 100;
 		int startMinutes = startTime % 100;
-		/*String start = Integer.toString(startTime);
-		if (start.length() != 4) {
-			startHours =
-		}*/
 		if (startHours > 24) {
 			throw new IllegalArgumentException();
 		}
@@ -290,10 +286,6 @@ public class Course {
 		}
 		int endHours = endTime / 100;
 		int endMinutes = endTime % 100;
-		/*String end = Integer.toString(endTime);
-		if (end.length() != 4) {
-			
-		}*/
 		if (endHours > 24) {
 			throw new IllegalArgumentException();
 		}
