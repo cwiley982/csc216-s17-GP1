@@ -265,8 +265,8 @@ public class Course {
 	/**
 	 * Sets the start and end times for the course
 	 * 
-	 * @param startTime
-	 * @param endTime
+	 * @param startTime start time of course
+	 * @param endTime end time of course
 	 */
 	public void setCourseTime(int startTime, int endTime) {
 		if (startTime < 0 || startTime > 2359 || endTime < 0 || endTime > 2359) {
