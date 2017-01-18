@@ -665,6 +665,5 @@ public class WolfSchedulerGUI extends JFrame implements ActionListener {
 				data = scheduler.getFullScheduledCourses();
 			}
 		}
-		
 	}
 }

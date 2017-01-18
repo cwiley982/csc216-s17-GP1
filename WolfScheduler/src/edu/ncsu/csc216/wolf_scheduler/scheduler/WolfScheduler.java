@@ -47,10 +47,10 @@ public class WolfScheduler {
 	 * @return the 2D array with the info for the courses in courseCatalog
 	 */
 	public String[][] getCourseCatalog() {
-		String catalog[][] = new String[courseCatalog.size()][3];
-		if (courseCatalog.size() < 0) {
+		if (courseCatalog == null) {
 			return new String[1][1];
 		}
+		String catalog[][] = new String[courseCatalog.size()][3];
 		for (int i = 0; i < courseCatalog.size(); i++) {
 			catalog[i][0] = courseCatalog.get(i).getName();
 			catalog[i][1] = courseCatalog.get(i).getSection();
@@ -66,10 +66,10 @@ public class WolfScheduler {
 	 * @return the 2D array containing all of the information for each course in schedule
 	 */
 	public String[][] getFullScheduledCourses() {
-		String fullSchedule[][] = new String[schedule.size()][6];
-		if (schedule.size() < 0) {
+		if (schedule == null) {
 			return new String[1][1];
 		}
+		String fullSchedule[][] = new String[schedule.size()][6];
 		for (int i = 0; i < schedule.size(); i++) {
 			fullSchedule[i][0] = schedule.get(i).getName();
 			fullSchedule[i][1] = schedule.get(i).getSection();
@@ -88,10 +88,10 @@ public class WolfScheduler {
 	 * @return the 2D array containing the schedule info
 	 */
 	public String[][] getScheduledCourses() {
-		String partialSchedule[][] = new String[schedule.size()][3];
-		if (schedule.size() < 0) {
+		if (schedule == null) {
 			return new String[1][1];
 		}
+		String partialSchedule[][] = new String[schedule.size()][3];
 		for (int i = 0; i < schedule.size(); i++) {
 			partialSchedule[i][0] = schedule.get(i).getName();
 			partialSchedule[i][1] = schedule.get(i).getSection();
