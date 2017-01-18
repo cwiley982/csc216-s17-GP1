@@ -4,7 +4,9 @@
 package edu.ncsu.csc216.wolf_scheduler.course;
 
 /**
- * @author Caitlyn
+ * Creates a Course object with fields specifying the name, section, instructor's id, times, etc
+ * 
+ * @author Caitlyn Wiley
  *
  */
 public class Course {
